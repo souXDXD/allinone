@@ -171,5 +171,3 @@ while true; do
 
   sleep 30
 done
-
-is there any personal info, system specific info in it?
