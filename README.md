@@ -1,72 +1,80 @@
-# System Monitor Script (for Raspberry Pi)
+System Monitor Script (for Raspberry Pi)
+A lightweight Bash script that displays real-time system stats for your Raspberry Pi.
+It monitors CPU/SSD temperatures, memory and disk usage, network info, and running services.
+The script also logs the highest CPU/SSD temperatures for the last 7 days.
 
-A lightweight **Bash script** that displays **real-time system stats** for your Raspberry Pi.  
-It monitors CPU/SSD temperatures, memory and disk usage, network info, and running services.  
-The script also logs the **highest CPU/SSD temperatures for the last 7 days**.
+Table of Contents
+Features
 
----
+How It Works
 
-## Table of Contents
-- [Features](#features)
-- [How It Works](#how-it-works)
-- [Requirements](#requirements)
-- [How to Use](#how-to-use)
-- [Customizable Settings](#customizable-settings)
-- [Example Output](#example-output)
-- [Notes](#notes)
+Requirements
 
----
+How to Use
 
-## Features
-- **Date & time** display.
-- **Current user**.
-- **Network info** (IP address, Wi-Fi AP mode).
-- **CPU usage & temperature**.
-- **SSD temperature** (via `smartctl`).
-- **Memory and disk usage**.
-- **Status of services** (Pi-hole, Transmission, etc.).
-- **Top 20 processes using memory**.
-- Maintains a **7-day record of max CPU/SSD temperatures**.
+Customizable Settings
 
----
+Example Output
 
-## How It Works
-- Updates **every 30 seconds** in a loop.
-- Tracks and stores **daily max temperatures**.
-- Monitors **internet status** and key services.
-- Displays available **storage info** for root and SSD drives.
-- Shows the **size of `lnp.log`** (if present).
+Notes
 
----
+Features
+Date & time display
 
-## Requirements
-Most tools are **pre-installed** on Raspberry Pi OS.
+Current user
 
-Install `smartctl` (for SSD temperature):
-```bash
+Network info (IP address, Wi-Fi AP mode)
+
+CPU usage & temperature
+
+SSD temperature (via smartctl)
+
+Memory and disk usage
+
+Status of services (Pi-hole, Transmission, etc.)
+
+Top 20 processes using memory
+
+Maintains a 7-day record of max CPU/SSD temperatures
+
+How It Works
+Updates every 30 seconds in a loop
+
+Tracks and stores daily max temperatures
+
+Monitors internet status and key services
+
+Displays available storage info for root and SSD drives
+
+Shows the size of lnp.log (if present)
+
+Requirements
+Most tools are pre-installed on Raspberry Pi OS.
+Install smartctl (for SSD temperature):
 sudo apt install smartmontools
 
-
-# Optional tools (if you use these features):
+Optional tools (if you use these features):
 sudo apt install transmission-daemon hostapd
 
-# How to Use -
+How to Use
+Save the script to a file (e.g., monitor.sh)
 
-Save the script to a file (e.g., monitor.sh).
 Make it executable:
-chmod +x - monitor.sh
-run it - ./monitor.sh
+chmod +x monitor.sh
 
-# Customizable Settings -
+Run it:
+./monitor.sh
 
-TEMP_THRESHOLD – Warning temperature (default: 55°C).
-MAX_TEMP_DAYS – How many days of temperature history to keep (default: 7 days).
-IFACE/WLAN_IF – Change network interface names if yours are different.
-Get SSD temp (NVMe) using smartctl -x - under this change the mount path, if you want to view storage space as well.
+Customizable Settings
+TEMP_THRESHOLD – Warning temperature (default: 55°C)
+
+MAX_TEMP_DAYS – How many days of temperature history to keep (default: 7 days)
+
+IFACE/WLAN_IF – Network interface names (default: eth0 and wlan0)
 
 
-# Example output -
 
+Example Output
 Date: Tuesday 22 July 2025 07:40:54 PM IST
 Current user: pi
 Internet Interface: eth0
@@ -76,14 +84,15 @@ Memory Usage: 1091MB / 7821MB
 CPU Temp: 38.4'C (max: 43'C)
 SSD Temp: 44'C (max: 58'C)
 
-Pi-hole            UP
-WLAN Interface     AP Mode, 192.168.50.1
-Transmission       Running, 192.168.1.201:9092
-Memory Card        33 GB left (55.9% free of 59 GB)
-SSD (/mnt/ssd)     38 GB left (8.1% free of 469 GB)
+Pi-hole UP
+WLAN Interface AP Mode, 192.168.50.1
+Transmission Running, 192.168.1.201:9092
+Memory Card 33 GB left (55.9% free of 59 GB)
+SSD (/mnt/ssd) 38 GB left (8.1% free of 469 GB)
 
+Notes
+The script does not send data anywhere — all output is local
 
-Notes -
+Local IPs (e.g., 192.168.x.x) are safe and only visible on your network
 
-The script does not send data anywhere — it only shows info on your terminal.
-Local IP addresses (e.g., 192.168.x.x) are safe; they are visible only inside your home network.
+Works best on Raspberry Pi OS or any Debian-based distro
