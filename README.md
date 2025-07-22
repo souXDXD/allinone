@@ -1,33 +1,53 @@
-# System Monitor Script (for Raspberry Pi) -
+# System Monitor Script (for Raspberry Pi)
 
-This script displays real-time system stats, including:
+A lightweight **Bash script** that displays **real-time system stats** for your Raspberry Pi.  
+It monitors CPU/SSD temperatures, memory and disk usage, network info, and running services.  
+The script also logs the **highest CPU/SSD temperatures for the last 7 days**.
 
-Date & time
-Current user
-Network info (IP, Wi-Fi AP mode)
-CPU usage & temperature
-SSD temperature
-Memory and disk usage
-Status of services (Pi-hole, Transmission, etc.)
-Top 20 processes using memory
-It also keeps a 7-day record of max CPU/SSD temperatures.
+---
 
+## Table of Contents
+- [Features](#features)
+- [How It Works](#how-it-works)
+- [Requirements](#requirements)
+- [How to Use](#how-to-use)
+- [Customizable Settings](#customizable-settings)
+- [Example Output](#example-output)
+- [Notes](#notes)
 
-# How It Works -
+---
 
-The script runs in a loop, updating every 30 seconds.
-It logs today's highest temperature for CPU and SSD.
-It checks if internet and services (like Pi-hole or Transmission) are running.
-Displays storage info for root and SSD drives.
-Shows the size of lnp.log file (if present).
+## Features
+- **Date & time** display.
+- **Current user**.
+- **Network info** (IP address, Wi-Fi AP mode).
+- **CPU usage & temperature**.
+- **SSD temperature** (via `smartctl`).
+- **Memory and disk usage**.
+- **Status of services** (Pi-hole, Transmission, etc.).
+- **Top 20 processes using memory**.
+- Maintains a **7-day record of max CPU/SSD temperatures**.
 
-# Requirements -
+---
 
-Most tools are pre-installed on Raspberry Pi OS.
-For SSD temperature, install smartctl:
+## How It Works
+- Updates **every 30 seconds** in a loop.
+- Tracks and stores **daily max temperatures**.
+- Monitors **internet status** and key services.
+- Displays available **storage info** for root and SSD drives.
+- Shows the **size of `lnp.log`** (if present).
+
+---
+
+## Requirements
+Most tools are **pre-installed** on Raspberry Pi OS.
+
+Install `smartctl` (for SSD temperature):
+```bash
 sudo apt install smartmontools
 
-Optional tools (if you use these features):
+
+# Optional tools (if you use these features):
 sudo apt install transmission-daemon hostapd
 
 # How to Use -
